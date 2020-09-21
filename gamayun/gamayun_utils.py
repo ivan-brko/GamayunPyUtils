@@ -1,18 +1,18 @@
-import GamayunResult_pb2_grpc
-import GamayunResult_pb2
+from . import __GamayunResult_pb2_grpc as GamayunResult_pb2_grpc
+from . import __GamayunResult_pb2 as GamayunResult_pb2
 import grpc
 import traceback
 import os
 
 def report_result(results):
-    job_name = get_job_name()
+    job_name = __get_job_name()
     channel = grpc.insecure_channel('localhost:16656')
     stub = GamayunResult_pb2_grpc.ResultStub(channel)
     res = GamayunResult_pb2.JobResult(name = job_name, results = results)
     stub.ReportResult(res)
 
 def report_error(error):
-    job_name = get_job_name()
+    job_name = __get_job_name()
     channel = grpc.insecure_channel('localhost:16656')
     stub = GamayunResult_pb2_grpc.ResultStub(channel)
     err = GamayunResult_pb2.JobError(name = job_name, error = error)

@@ -1,1 +1,11 @@
-python3 -m grpc_tools.protoc -Iproto --python_out=. --grpc_python_out=. proto/GamayunResult.proto
+python3 -m grpc_tools.protoc -Iproto --python_out=gamayun_utils --grpc_python_out=gamayun_utils proto/GamayunResult.proto
+
+python3 setup.py sdist bdist_wheel
+
+
+check https://stackoverflow.com/questions/54597212/using-hyphen-dash-in-python-repository-name-and-package-name/54599368
+
+change 
+import GamayunResult_pb2 as GamayunResult__pb2
+to 
+from . import GamayunResult_pb2 as GamayunResult__pb2

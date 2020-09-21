@@ -1,1 +1,4 @@
 __pycache__
+build
+dist
+gamayun_utils.egg-info

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import GamayunResult_pb2 as GamayunResult__pb2
+from . import __GamayunResult_pb2 as GamayunResult__pb2
 
 
 class ResultStub(object):
