@@ -1,6 +1,7 @@
 python3 -m grpc_tools.protoc -Iproto --python_out=gamayun_utils --grpc_python_out=gamayun_utils proto/GamayunResult.proto
 
 python3 setup.py sdist bdist_wheel
+python3 -m twine upload --repository testpypi dist/*
 
 
 check https://stackoverflow.com/questions/54597212/using-hyphen-dash-in-python-repository-name-and-package-name/54599368
