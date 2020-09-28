@@ -2,3 +2,5 @@ __pycache__
 build
 dist
 gamayun_utils.egg-info
+.devcontainer/devcontainer.json
+.devcontainer/Dockerfile
