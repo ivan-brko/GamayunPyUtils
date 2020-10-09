@@ -27,7 +27,9 @@ apk add --no-cache python3 \
 && apk add --no-cache linux-headers \
 && apk add --no-cache python3-dev
 ```
-Note that suggested way of using Gamayun is by building a docker image based on Gamayun image, so you don't have to install these dependencies locally. See [Gamayun main repo](https://github.com/ivan-brko/Gamayun) for more information.
+Note that suggested way of using Gamayun is with Docker, so you don't have to install these dependencies locally. If you are using Docker, there is an image containing Gamayun and Gamayun Python utilities [here](https://hub.docker.com/repository/docker/ibrko/gamayun_py_utils). 
+
+See [Gamayun main repo](https://github.com/ivan-brko/Gamayun) for more information and see example usage [here](https://github.com/ivan-brko/GamayunConfigurationSample).
 
 <a name="usage"></a>
 ## Usage
@@ -57,7 +59,7 @@ There is a function with the following signature in this package:
 def run_gamayun_script_logic(callback)
 ```
 
-All the script logic should be placed in some function and that function should be given to ```run_gamayun_script_logic``` as argument as this will ensure that all uncought exceptions are cought and reported as errors to Gamayun. 
+All the script logic should be placed in some function and that function should be given to ```run_gamayun_script_logic``` as argument as this will ensure that all uncought exceptions are caught and reported as errors to Gamayun. 
 
 So, a job script file should look something like this:
 ```python
