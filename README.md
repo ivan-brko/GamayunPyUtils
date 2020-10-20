@@ -41,15 +41,30 @@ This part documents the package API
 Functions for reporting results or errors from the script are following:
 
 ```python
-def report_result(results)
+def report_result_with_strings_only(results)
 ```
+This function is used when the result we want to report is a list of strings
+
+
+```python
+def report_result_with_maps_only(results)
+```
+This function is used when the result we want to report is a list of maps
+
+
+```python
+def report_result_with_maps_and_strings(mapResults, stringResults)
+```
+This function is used when the result we want to report is a list of strings and a list of maps
+
+
 ```python
 def report_error(error)
 ```
+This function is used when we want to report error which will be forwarded through the notifier interface
 
-```report_result``` receives a list of strings which represent results and ```report_error``` receives a string which represents the error.
 
-Note that once result or error is reported for the script/gamayun-job, Gamayun will stop listening for results/errors for that job, so in entire job there should be only one call to ```report_result``` or ```report_error```.
+Note that once result or error is reported for the script/gamayun-job, Gamayun will stop listening for results/errors for that job, so in entire job there should be only one call to any of the ```report``` functions.
 
 <a name="executing-script-logic"></a>
 ### Executing the script logic
@@ -63,14 +78,14 @@ All the script logic should be placed in some function and that function should 
 
 So, a job script file should look something like this:
 ```python
-from gamayun_utils import report_result
+from gamayun_utils import report_result_with_maps_only
 from gamayun_utils import report_error
 from gamayun_utils import run_gamayun_script_logic
 
 def script_logic():
     # place the script logic here
     if OK:
-        report_result(results)
+        report_result_with_maps_only(results)
     else:
         report_error(error)
 

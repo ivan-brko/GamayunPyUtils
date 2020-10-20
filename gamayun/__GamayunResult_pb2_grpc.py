@@ -15,9 +15,19 @@ class ResultStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ReportResult = channel.unary_unary(
-                '/gamayun.Result/ReportResult',
-                request_serializer=GamayunResult__pb2.JobResult.SerializeToString,
+        self.ReportResultWithRawStringsOnly = channel.unary_unary(
+                '/gamayun.Result/ReportResultWithRawStringsOnly',
+                request_serializer=GamayunResult__pb2.JobResultWithRawStringsOnly.SerializeToString,
+                response_deserializer=GamayunResult__pb2.EmptyResponse.FromString,
+                )
+        self.ReportResultWithMapOnly = channel.unary_unary(
+                '/gamayun.Result/ReportResultWithMapOnly',
+                request_serializer=GamayunResult__pb2.JobResultWithMapOnly.SerializeToString,
+                response_deserializer=GamayunResult__pb2.EmptyResponse.FromString,
+                )
+        self.ReportResultWithMapAndStrings = channel.unary_unary(
+                '/gamayun.Result/ReportResultWithMapAndStrings',
+                request_serializer=GamayunResult__pb2.JobResultWithMapAndStrings.SerializeToString,
                 response_deserializer=GamayunResult__pb2.EmptyResponse.FromString,
                 )
         self.ReportError = channel.unary_unary(
@@ -31,8 +41,22 @@ class ResultServicer(object):
     """The result service definition.
     """
 
-    def ReportResult(self, request, context):
-        """Reports a result to Gamayun
+    def ReportResultWithRawStringsOnly(self, request, context):
+        """Reports the string only result to Gamayun
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReportResultWithMapOnly(self, request, context):
+        """Reports the map only result to Gamayun
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReportResultWithMapAndStrings(self, request, context):
+        """Reports the result with map and strings to Gamayun
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -48,9 +72,19 @@ class ResultServicer(object):
 
 def add_ResultServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ReportResult': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReportResult,
-                    request_deserializer=GamayunResult__pb2.JobResult.FromString,
+            'ReportResultWithRawStringsOnly': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReportResultWithRawStringsOnly,
+                    request_deserializer=GamayunResult__pb2.JobResultWithRawStringsOnly.FromString,
+                    response_serializer=GamayunResult__pb2.EmptyResponse.SerializeToString,
+            ),
+            'ReportResultWithMapOnly': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReportResultWithMapOnly,
+                    request_deserializer=GamayunResult__pb2.JobResultWithMapOnly.FromString,
+                    response_serializer=GamayunResult__pb2.EmptyResponse.SerializeToString,
+            ),
+            'ReportResultWithMapAndStrings': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReportResultWithMapAndStrings,
+                    request_deserializer=GamayunResult__pb2.JobResultWithMapAndStrings.FromString,
                     response_serializer=GamayunResult__pb2.EmptyResponse.SerializeToString,
             ),
             'ReportError': grpc.unary_unary_rpc_method_handler(
@@ -70,20 +104,55 @@ class Result(object):
     """
 
     @staticmethod
-    def ReportResult(request,
+    def ReportResultWithRawStringsOnly(request,
             target,
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/gamayun.Result/ReportResult',
-            GamayunResult__pb2.JobResult.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/gamayun.Result/ReportResultWithRawStringsOnly',
+            GamayunResult__pb2.JobResultWithRawStringsOnly.SerializeToString,
             GamayunResult__pb2.EmptyResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReportResultWithMapOnly(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/gamayun.Result/ReportResultWithMapOnly',
+            GamayunResult__pb2.JobResultWithMapOnly.SerializeToString,
+            GamayunResult__pb2.EmptyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReportResultWithMapAndStrings(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/gamayun.Result/ReportResultWithMapAndStrings',
+            GamayunResult__pb2.JobResultWithMapAndStrings.SerializeToString,
+            GamayunResult__pb2.EmptyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ReportError(request,
@@ -91,6 +160,7 @@ class Result(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -99,4 +169,4 @@ class Result(object):
             GamayunResult__pb2.JobError.SerializeToString,
             GamayunResult__pb2.EmptyResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

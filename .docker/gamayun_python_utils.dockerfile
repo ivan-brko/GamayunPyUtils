@@ -1,4 +1,4 @@
-FROM ibrko/gamayun:0.2.0
+FROM ibrko/gamayun:0.2.1
 
 RUN apk add --no-cache bash \
     && apk add --no-cache python3 \
@@ -13,6 +13,7 @@ RUN apk add --no-cache bash \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache \
-    && pip install gamayun-utils==0.2.0 \
+    && pip install gamayun-utils==0.2.1 \
+    #&& pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple gamayun-utils==0.2.0.99 \
     && pip install requests \
     && pip install BeautifulSoup4
