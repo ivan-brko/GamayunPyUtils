@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="gamayun-utils",
-    version="0.2.1",
+    version="0.2.1.1",
     author="Ivan Brko",
     author_email="ivan.brko@outlook.com",
     description="Python utils for writing gamayun job scripts",

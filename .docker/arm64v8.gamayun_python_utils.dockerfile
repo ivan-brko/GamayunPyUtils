@@ -13,6 +13,6 @@ RUN apk add --no-cache bash \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache \
-    && pip install gamayun-utils==0.2.1 \
+    && pip install gamayun-utils==0.2.1.1 \
     && pip install requests \
     && pip install BeautifulSoup4

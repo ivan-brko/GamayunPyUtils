@@ -17,7 +17,7 @@ def report_result_with_maps_only(results):
     stub = GamayunResult_pb2_grpc.ResultStub(channel)
     wrapped_results = list()
     for elem in results:
-        wrapped_results.append(GamayunResult_pb2.MapResult(mapResult = elem))
+        wrapped_results.append(GamayunResult_pb2.MapResult(mapResult = {k:v for (k,v) in elem.items() if v is not None}))
     res = GamayunResult_pb2.JobResultWithMapOnly(name = job_name, results = wrapped_results)
     stub.ReportResultWithMapOnly(res)
 
@@ -27,7 +27,7 @@ def report_result_with_maps_and_strings(mapResults, stringResults):
     stub = GamayunResult_pb2_grpc.ResultStub(channel)
     wrapped_results = list()
     for elem in mapResults:
-        wrapped_results.append(GamayunResult_pb2.MapResult(mapResult = elem))
+        wrapped_results.append(GamayunResult_pb2.MapResult(mapResult = {k:v for (k,v) in elem.items() if v is not None}))
     res = GamayunResult_pb2.JobResultWithMapAndStrings(name = job_name, mapResults = wrapped_results, stringResults = stringResults)
     stub.ReportResultWithMapAndStrings(res)
 
